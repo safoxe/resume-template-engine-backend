@@ -12,7 +12,8 @@ namespace engine_plugin_backend.Controllers
 
         //dependency injection is used to initialise ScaffoldService
         // See Startup.cs file to see how it was registered
-        public ScaffoldController(ScaffoldService scaffoldService) {
+        public ScaffoldController(ScaffoldService scaffoldService)
+        {
             _scaffoldedService = scaffoldService;
         }
 

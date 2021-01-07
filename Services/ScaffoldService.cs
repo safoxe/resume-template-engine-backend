@@ -1,8 +1,10 @@
 using MongoDB.Driver;
 using engine_plugin_backend.Models;
 
-namespace engine_plugin_backend.Services {
-    public class ScaffoldService {
+namespace engine_plugin_backend.Services
+{
+    public class ScaffoldService
+    {
         private readonly IMongoCollection<ScaffoldModel> _scaffoldData;
 
         public ScaffoldService(IBaseSettingsModels settings)
@@ -13,7 +15,8 @@ namespace engine_plugin_backend.Services {
             _scaffoldData = database.GetCollection<ScaffoldModel>(settings.CollectionName);
         }
 
-        public ScaffoldModel AddScaffoldedData(ScaffoldModel data) {
+        public ScaffoldModel AddScaffoldedData(ScaffoldModel data)
+        {
             _scaffoldData.InsertOne(data);
             return data;
         }
