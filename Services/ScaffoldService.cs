@@ -1,10 +1,7 @@
 using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
 using engine_plugin_backend.Models;
 
 namespace engine_plugin_backend.Services {
-
     public class ScaffoldService {
         private readonly IMongoCollection<ScaffoldModel> _scaffoldData;
 
