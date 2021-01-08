@@ -20,5 +20,12 @@ namespace engine_plugin_backend.Services
             _scaffoldData.InsertOne(data);
             return data;
         }
+
+        public ScaffoldModel GetScaffoldedData(string projectName)
+        {
+            // TO-DO Add ok search by project name(?)
+            var data = _scaffoldData.Find<ScaffoldModel>(data => data.Id == "5ff6d922434c4e763d4abd01").FirstOrDefault();
+            return data;
+        }
     }
 }

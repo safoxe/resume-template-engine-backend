@@ -12,6 +12,7 @@ namespace engine_plugin_backend
 {
     public class Startup
     {
+        public static readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,6 +23,14 @@ namespace engine_plugin_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // enable CORS for template-engine front-end
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder => builder.WithOrigins(Configuration.GetValue<string>("FrontEndOrigin")).AllowAnyHeader()
+                      .AllowAnyMethod()
+                      .AllowCredentials());
+            });
             // get scaffold settings model from appsettings.json
             services.Configure<ScaffoldDatabaseSettingsModel>(
                 Configuration.GetSection(nameof(ScaffoldDatabaseSettingsModel)));
@@ -51,6 +60,8 @@ namespace engine_plugin_backend
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }

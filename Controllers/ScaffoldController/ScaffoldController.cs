@@ -18,9 +18,10 @@ namespace engine_plugin_backend.Controllers
         }
 
         [HttpGet("getScaffoldedData")]
-        public ActionResult<string> GetScaffoldData()
+        public ActionResult<ScaffoldModel> GetScaffoldData()
         {
-            return "result";
+            // TO-DO Search for scaffolded data by projectName(?)
+            return _scaffoldedService.GetScaffoldedData("bal");
         }
 
         //data is passed via body of the request
