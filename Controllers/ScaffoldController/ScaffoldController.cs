@@ -17,16 +17,16 @@ namespace engine_plugin_backend.Controllers
             _scaffoldedService = scaffoldService;
         }
 
-        [HttpGet("getScaffoldedData")]
-        public ActionResult<ScaffoldModel> GetScaffoldData()
+        [HttpGet("getScaffoldedData/{id?}")]
+        public ActionResult<ScaffoldModel> GetScaffoldData(string id)
         {
             // TO-DO Search for scaffolded data by projectName(?)
-            return _scaffoldedService.GetScaffoldedData("bal");
+            return _scaffoldedService.GetScaffoldedData(id);
         }
 
         //data is passed via body of the request
         [HttpPost("addScaffoldedData")]
-        public ActionResult<ScaffoldModel> AddScaffoldedData([FromBody] ScaffoldModel scaffoldData)
+        public ActionResult<string> AddScaffoldedData([FromBody] ScaffoldModel scaffoldData)
         {
             return _scaffoldedService.AddScaffoldedData(scaffoldData);
         }

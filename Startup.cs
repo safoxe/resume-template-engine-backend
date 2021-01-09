@@ -27,7 +27,8 @@ namespace engine_plugin_backend
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder => builder.WithOrigins(Configuration.GetValue<string>("FrontEndOrigin")).AllowAnyHeader()
+                      builder => builder.WithOrigins(Configuration.GetValue<string>("FrontEndOrigin"),
+                       Configuration.GetValue<string>("PluginOrigin")).AllowAnyHeader()
                       .AllowAnyMethod()
                       .AllowCredentials());
             });

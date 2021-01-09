@@ -15,17 +15,15 @@ namespace engine_plugin_backend.Services
             _scaffoldData = database.GetCollection<ScaffoldModel>(settings.CollectionName);
         }
 
-        public ScaffoldModel AddScaffoldedData(ScaffoldModel data)
+        public string AddScaffoldedData(ScaffoldModel data)
         {
             _scaffoldData.InsertOne(data);
-            return data;
+            return data.Id;
         }
 
-        public ScaffoldModel GetScaffoldedData(string projectName)
+        public ScaffoldModel GetScaffoldedData(string id)
         {
-            // TO-DO Add ok search by project name(?)
-            var data = _scaffoldData.Find<ScaffoldModel>(data => data.Id == "5ff6d922434c4e763d4abd01").FirstOrDefault();
-            return data;
+            return _scaffoldData.Find<ScaffoldModel>(data => data.Id == id).FirstOrDefault();
         }
     }
 }
