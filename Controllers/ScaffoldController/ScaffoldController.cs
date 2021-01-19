@@ -10,7 +10,7 @@ namespace engine_plugin_backend.Controllers
     {
         private readonly ScaffoldService _scaffoldedService;
 
-        //dependency injection is used to initialise ScaffoldService
+        // dependency injection is used to initialise ScaffoldService
         // See Startup.cs file to see how it was registered
         public ScaffoldController(ScaffoldService scaffoldService)
         {
@@ -24,7 +24,9 @@ namespace engine_plugin_backend.Controllers
             return _scaffoldedService.GetScaffoldedData(id);
         }
 
-        //data is passed via body of the request
+        // part of the data like PositionType and SeniorityLevel
+        // is selected by manager, so it's get via body
+        // other data is got from mock-company site by scrapping the site
         [HttpPost("addScaffoldedData")]
         public ActionResult<string> AddScaffoldedData([FromBody] ScaffoldModel scaffoldData)
         {

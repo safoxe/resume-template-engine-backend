@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using engine_plugin_backend.Models;
 using engine_plugin_backend.Services;
 using Microsoft.Extensions.Options;
+using engine_plugin_backend.Interfaces;
 
 namespace engine_plugin_backend
 {
@@ -44,6 +45,10 @@ namespace engine_plugin_backend
             // as it uses MongoDb client and it's good practice that multiple
             // clients should not be created
             services.AddSingleton<ScaffoldService>();
+
+            //register webScrapper to be a singleton service
+            services.AddHostedService<ScaffoldService>().AddSingleton<IWebScrapper, CompanySiteWebScrapper>();
+
             services.AddControllers();
             _ = services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "engine_plugin_backend", Version = "v1" }));
         }
