@@ -17,5 +17,7 @@ namespace engine_plugin_backend.Models
         public string SeniorityLevel { get; set; }
         public string MainTechnology { get; set; }
         public List<string> AdditionalTechnologies { get; set; }
+
+        public string Description { get; set; }
     }
 }

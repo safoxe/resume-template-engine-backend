@@ -35,6 +35,7 @@ namespace engine_plugin_backend.Services
                 resume.Name = driver.FindElement(By.Id("project_name")).Text;
                 resume.Domain = driver.FindElement(By.Id("domain")).Text;
                 resume.MainTechnology = driver.FindElement(By.Id("main_technology")).Text;
+                resume.Description = driver.FindElement(By.Id("description")).Text;
                 resume.AdditionalTechnologies = new System.Collections.Generic.List<string>();
                 foreach (var technology in driver.FindElement(By.Id("additional_technologies")).FindElements(By.CssSelector("ul>li")))
                 {
