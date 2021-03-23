@@ -22,6 +22,8 @@ namespace engine_plugin_backend.Services
 
         public string SignUpUser(UserModel user)
         {
+            // BAD-BAD practice, at least add salt
+            // or better: migrate to Okta
             byte[] data = System.Text.Encoding.ASCII.GetBytes(user.Password);
             data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
             user.Password = System.Text.Encoding.ASCII.GetString(data);
