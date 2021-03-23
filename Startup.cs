@@ -34,17 +34,19 @@ namespace engine_plugin_backend
                       .AllowCredentials());
             });
             // get scaffold settings model from appsettings.json
-            services.Configure<ScaffoldDatabaseSettingsModel>(
-                Configuration.GetSection(nameof(ScaffoldDatabaseSettingsModel)));
+            services.Configure<UserDatabaseSettingsModel>(
+                Configuration.GetSection(nameof(UserDatabaseSettingsModel)));
 
             //register settigs class to be a singleton service
             services.AddSingleton<IBaseSettingsModels>(sp =>
-                sp.GetRequiredService<IOptions<ScaffoldDatabaseSettingsModel>>().Value);
+                sp.GetRequiredService<IOptions<UserDatabaseSettingsModel>>().Value);
 
             //register scaffold service as singleton service
             // as it uses MongoDb client and it's good practice that multiple
             // clients should not be created
             services.AddSingleton<ScaffoldService>();
+
+            services.AddSingleton<SignUpService>();
 
             //register webScrapper to be a singleton service
             services.AddHostedService<ScaffoldService>().AddSingleton<IWebScrapper, CompanySiteWebScrapper>();

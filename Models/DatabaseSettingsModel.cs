@@ -1,6 +1,6 @@
 namespace engine_plugin_backend.Models
 {
-    public class ScaffoldDatabaseSettingsModel : IBaseSettingsModels
+    public class UserDatabaseSettingsModel : IBaseSettingsModels
     {
         public string CollectionName { get; set; }
         public string ConnectionString { get; set; }
