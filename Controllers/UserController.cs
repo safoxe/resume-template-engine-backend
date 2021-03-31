@@ -21,7 +21,13 @@ namespace engine_plugin_backend.Controllers
         [HttpPost("signUpUser")]
         public ActionResult<string> SignUpUser([FromBody] UserModel userModel)
         {
-            return _userService.SignUpUser(userModel);
+            try {
+                _userService.SignUpUser(userModel);
+                return Ok();
+            }
+            catch {
+                return BadRequest(new { error_text = "User already exists"});
+            }
         }
 
         [HttpPost("signInUser")]

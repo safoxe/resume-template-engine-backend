@@ -27,7 +27,7 @@ namespace engine_plugin_backend.Services
         {
             if (CheckUserExists(user))
             {
-                return "";
+                throw new System.Exception("User already exists");
             }
             // BAD-BAD practice, at least add salt
             // or better: migrate to Okta
