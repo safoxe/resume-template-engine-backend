@@ -31,5 +31,12 @@ namespace engine_plugin_backend.Services
             project.UserId = foundUser.Id;
             _projectModel.InsertOne(project);
         }
+
+        public ProjectModel GetProject(string userName, string projectId)
+        {
+            var foundUser = _userModel.Find<UserModel>((userModel) => userName == userModel.Email).FirstOrDefault();
+            var foundProject = _projectModel.Find<ProjectModel>((project) => project.UserId == foundUser.Id).ToList<ProjectModel>().Find((project) => project.Id == projectId);
+            return foundProject;
+        }
     }
 }

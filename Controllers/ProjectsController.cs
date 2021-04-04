@@ -31,6 +31,20 @@ namespace engine_plugin_backend.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("get")]
+        public ActionResult<string> GetProject([FromQuery]string id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var project = _projectsService.GetProject(User.Identity.Name, id);
+                return Json(project);
+            }
+
+            return BadRequest(new { error_text = "Unauthenticated access" });
+        }
+
+        [Authorize]
         [HttpPost]
         [Route("create")]
         public ActionResult<string> CreateProject([FromBody] ProjectModel project)

@@ -85,11 +85,11 @@ namespace engine_plugin_backend
 
             app.UseRouting();
 
+            app.UseCors(MyAllowSpecificOrigins);
+
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
