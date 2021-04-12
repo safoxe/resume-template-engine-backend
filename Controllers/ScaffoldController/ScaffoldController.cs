@@ -21,7 +21,7 @@ namespace engine_plugin_backend.Controllers
         public ActionResult<ScaffoldModel> GetScaffoldData(string id)
         {
             // TO-DO Search for scaffolded data by projectName(?)
-            return _scaffoldedService.GetScaffoldedData(id);
+            return new ScaffoldModel() { Name = "Name", Domain = "Domain", PositionType = "PositionType", SeniorityLevel = "SeniorityLevel", MainTechnology = "Main", AdditionalTechnologies = null };//_scaffoldedService.GetScaffoldedData(id);
         }
 
         // part of the data like PositionType and SeniorityLevel

@@ -64,6 +64,8 @@ namespace engine_plugin_backend
 
             services.AddSingleton<ProjectsService>();
 
+            services.AddSingleton<ResumeService>();
+
             //register webScrapper to be a singleton service
             services.AddHostedService<ScaffoldService>().AddSingleton<IWebScrapper, CompanySiteWebScrapper>();
 
