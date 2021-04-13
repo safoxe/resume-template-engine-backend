@@ -51,8 +51,8 @@ namespace engine_plugin_backend.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                _projectsService.CreateProject(User.Identity.Name, project);
-                return Ok();
+                var id = _projectsService.CreateProject(User.Identity.Name, project);
+                return Ok(id);
             }
 
             return BadRequest(new { error_text = "Unauthenticated access" });

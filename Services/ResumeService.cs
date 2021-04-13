@@ -18,9 +18,10 @@ namespace engine_plugin_backend.Services
             _projectModel = database.GetCollection<ProjectModel>(settings.ProjectsCollection);
         }
 
-        public void CreateResume(ResumeModel resume)
+        public string CreateResume(ResumeModel resume)
         {
             _resumeModel.InsertOne(resume);
+            return resume.Id;
         }
 
         public IList<ResumeModel> GetResumes(string userName, string projectId)

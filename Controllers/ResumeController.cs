@@ -34,12 +34,12 @@ namespace engine_plugin_backend.Controllers
         [Authorize]
         [HttpPost]
         [Route("create")]
-        public ActionResult<string> CreateProject([FromBody] ResumeModel resume)
+        public ActionResult<string> CreateResume([FromBody] ResumeModel resume)
         {
             if (User.Identity.IsAuthenticated)
             {
-                _resumeService.CreateResume(resume);
-                return Ok();
+                var id = _resumeService.CreateResume(resume);
+                return Ok(id);
             }
 
             return BadRequest(new { error_text = "Unauthenticated access" });
