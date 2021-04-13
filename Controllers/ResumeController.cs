@@ -44,5 +44,19 @@ namespace engine_plugin_backend.Controllers
 
             return BadRequest(new { error_text = "Unauthenticated access" });
         }
+
+        [Authorize]
+        [HttpGet]
+        [Route("getFullResumeInfo")]
+        public ActionResult<string> GetFullResumeData([FromQuery]string id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var resume = _resumeService.GetFullResumeData(id);
+                return Json(resume);
+            }
+
+            return BadRequest(new { error_text = "Unauthenticated access" });
+        }
     }
 }

@@ -29,5 +29,20 @@ namespace engine_plugin_backend.Services
             var foundResumes = _resumeModel.Find<ResumeModel>((resume) => resume.ProjectId == foundProject.Id).ToList<ResumeModel>();
             return foundResumes;
         }
+
+        public FullResumeData GetFullResumeData(string resumeId) {
+            var fullResumeData = new FullResumeData();
+            var foundResume = _resumeModel.Find<ResumeModel>((resume) => resume.Id == resumeId).FirstOrDefault();
+            var foundProject = _projectModel.Find<ProjectModel>((project) => project.Id == foundResume.ProjectId).FirstOrDefault();
+            fullResumeData.Name = foundProject.Name;
+            fullResumeData.Description = foundProject.Description;
+            fullResumeData.UsedTechnologies = foundProject.UsedTechnologies;
+            fullResumeData.AssignedTo = foundProject.AssignedTo;
+            fullResumeData.Location = foundProject.Location;
+            fullResumeData.ProfessionType = foundResume.ProfessionType;
+            fullResumeData.SeniorityLevel = foundResume.SeniorityLevel;
+
+            return fullResumeData;
+        }
     }
 }
