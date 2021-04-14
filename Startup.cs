@@ -9,6 +9,8 @@ using engine_plugin_backend.Services;
 using Microsoft.Extensions.Options;
 using engine_plugin_backend.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace engine_plugin_backend
 {
@@ -84,6 +86,8 @@ namespace engine_plugin_backend
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 
