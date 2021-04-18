@@ -18,7 +18,7 @@ namespace engine_plugin_backend.Models
 
         public string Description { get; set; }
 
-        public string[] UsedTechnologies { get; set; }
+        public IList<string> UsedTechnologies { get; set; }
 
         public string AssignedTo { get; set; }
 

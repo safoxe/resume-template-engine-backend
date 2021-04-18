@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using engine_plugin_backend.Services;
 using engine_plugin_backend.Models;
+using System.Collections.Generic;
 
 namespace engine_plugin_backend.Controllers
 {
@@ -53,6 +54,20 @@ namespace engine_plugin_backend.Controllers
             {
                 var id = _projectsService.CreateProject(User.Identity.Name, project);
                 return Ok(id);
+            }
+
+            return BadRequest(new { error_text = "Unauthenticated access" });
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("updateTech")]
+        public ActionResult<string> UpdateTech([FromBody]string projectTech, [FromQuery] string projectId)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                _projectsService.UpdateTech(projectTech, projectId);
+                return Ok();
             }
 
             return BadRequest(new { error_text = "Unauthenticated access" });

@@ -1,6 +1,7 @@
 using MongoDB.Driver;
 using engine_plugin_backend.Models;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace engine_plugin_backend.Services
 {
@@ -38,6 +39,23 @@ namespace engine_plugin_backend.Services
             var foundUser = _userModel.Find<UserModel>((userModel) => userName == userModel.Email).FirstOrDefault();
             var foundProject = _projectModel.Find<ProjectModel>((project) => project.UserId == foundUser.Id).ToList<ProjectModel>().Find((project) => project.Id == projectId);
             return foundProject;
+        }
+
+        public void UpdateTech(string tech, string projectId) {
+            var foundProject = _projectModel.Find<ProjectModel>((project) => project.Id == projectId).FirstOrDefault();
+            if(foundProject != null) {
+                var technologies = new List<string>();
+                if(foundProject.UsedTechnologies != null) {
+                    foreach(var techn in foundProject.UsedTechnologies) {
+                        technologies.Add(techn);
+                    }
+                }
+                technologies.Add(tech);
+                var filter = Builders<ProjectModel>.Filter.Eq("_id", projectId);
+                var techArr = BsonArray.Create(technologies);
+                var update = Builders<ProjectModel>.Update.Set("UsedTechnologies", techArr);
+                _projectModel.FindOneAndUpdate(filter, update);
+            }
         }
     }
 }
